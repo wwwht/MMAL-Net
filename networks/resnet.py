@@ -356,3 +356,12 @@ def wide_resnet101_2(pth_path, pretrained=False, **kwargs):
     kwargs['width_per_group'] = 64 * 2
     return _resnet('wide_resnet101_2', Bottleneck, [3, 4, 23, 3],
                    pretrained, pth_path, **kwargs)
+
+if __name__ == '__main__':
+    
+    Model = resnet50(pth_path=None, pretrained=False)
+    input = torch.rand(10,3,448,448)
+    fm, embedding, conv5_b = Model(input)
+    print(fm.shape) # torch.Size([10, 2048, 14, 14])
+    print(embedding.shape) # torch.Size([10, 2048])
+    print(conv5_b.shape) # torch.Size([10, 2048, 14, 14])
