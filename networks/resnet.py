@@ -359,9 +359,9 @@ def wide_resnet101_2(pth_path, pretrained=False, **kwargs):
 
 if __name__ == '__main__':
     
-    Model = resnet50(pth_path=None, pretrained=False)
-    input = torch.rand(10,3,448,448)
+    Model = resnet50(pth_path=None, pretrained=False).cuda()
+    input = torch.rand(10,3,768,768).cuda()
     fm, embedding, conv5_b = Model(input)
-    print(fm.shape) # torch.Size([10, 2048, 14, 14])
+    print(fm.shape) # torch.Size([10, 2048, 14, 14]) # 768, torch.Size([10, 2048, 24, 24])
     print(embedding.shape) # torch.Size([10, 2048])
     print(conv5_b.shape) # torch.Size([10, 2048, 14, 14])

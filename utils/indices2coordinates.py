@@ -1,7 +1,9 @@
 import numpy as np
+import ipdb
 
 def ComputeCoordinate(image_size, stride, indice, ratio):
-    size = int(image_size / stride)
+    size = int(image_size / stride) # 768 / 32
+    # ipdb.set_trace()
     column_window_num = (size - ratio[1]) + 1
     x_indice = indice // column_window_num
     y_indice = indice % column_window_num
@@ -12,12 +14,13 @@ def ComputeCoordinate(image_size, stride, indice, ratio):
     # for image
     if x_lefttop < 0:
         x_lefttop = 0
+        x_rightlow +=1
     if y_lefttop < 0:
         y_lefttop = 0
+        y_rightlow +=1
     coordinate = np.array((x_lefttop, y_lefttop, x_rightlow, y_rightlow)).reshape(1, 4)
 
     return coordinate
-
 
 def indices2coordinates(indices, stride, image_size, ratio):
     batch, _ = indices.shape

@@ -15,7 +15,7 @@ def AOLM(fms, fm1):
     coordinates = []
     for i, m in enumerate(M):
         mask_np = m.cpu().numpy().reshape(14, 14)
-        component_labels = measure.label(mask_np)
+        component_labels = measure.label(mask_np) # 连通区域
 
         properties = measure.regionprops(component_labels)
         areas = []
@@ -45,4 +45,6 @@ def AOLM(fms, fm1):
         coordinate = [x_lefttop, y_lefttop, x_rightlow, y_rightlow]
         coordinates.append(coordinate)
     return coordinates
+
+# if __name__=='__main__':
 
